@@ -30,4 +30,16 @@ def read_file(file_name):
         line=line.split()
         lines_list.append(line)
     return lines_list
+def print_process(process):
+    date='{}'.format(process[2:7])
+    print('{0}\t{1}\t{2}{3: ^10}'.format(
+        process[0],
+        process[1].center(len('change_password')),
+        date.center(len(date)),
+        process[7],
+        process[8]
+        )
+        )
+
+    
 
