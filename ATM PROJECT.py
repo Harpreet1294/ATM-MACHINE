@@ -11,12 +11,11 @@ Published by:
 
                                                                                                                                                                """)
 try:
-    # read the 'Accounts.txt' file
-    # if you try to open non existing file in read mode, this will throw an error
+    
     f = open('Accounts.txt', 'r')
     f.close()
 except FileNotFoundError:
-    # if 'Accounts.txt' file is not found, create it
+
     f = open('Accounts.txt', 'w')
     f.close()
 
@@ -24,16 +23,16 @@ except FileNotFoundError:
 import os
 import time
 def clear_screen():
-    #This function clear the output of the screen
+    
     os.system('clear')
-    print()  # print blank line after clearing the screen
+    print() 
 def read_file(file_name):
     opened_file = open(file_name, 'r')
     lines_list = []
     for line in opened_file:
         line = line.split()
         lines_list.append(line)
-    #print(lines_list)
+
     return lines_list
 
 def print_process(process):
@@ -49,15 +48,10 @@ def print_process(process):
 
 
 def withdraw(ls):
-    # ls is a list of the information of the account
-    # ls[0] id
-    # ls[1] name
-    # ls[2] password
-    # ls[3] balance
+    
 
     current_balance = int(ls[3])
-    # make changes to another variable to keep the previous balance unchanged in ls[3]
-    # to print it later, then save ls[3] = current_balance
+   
     print('Your current balance: ' + ls[3])
 
     withdraw_amount = int(input('Enter withdraw amount: '))
@@ -72,11 +66,11 @@ def withdraw(ls):
     id_file = open(file_name, 'a')
 
     if len(process_list) == 0:
-        # if there are no processes in the file
+        
         last_id = 1
     else:
         last_id = int(process_list[len(process_list)-1][0]) + 1
-        # get last id and increment it
+        
 
     id_file.write('{0}\twithdraw\t\t\t{1}\t{2}\t{3}\n'.format(str(last_id), str(time.ctime()), ls[3], str(current_balance)))
     id_file.close()
@@ -87,29 +81,22 @@ def withdraw(ls):
 
 
 def deposit(ls):
-    # ls is a list of the information of the account
-    # ls elements are of type string
-    # ls[0] id
-    # ls[1] name
-    # ls[2] password
-    # ls[3] balance
-    current_balance = int(ls[3])  # make changes to another variable to keep the previous balance
-    # to print it later, then save ls[3] = current_balance
+    
+    current_balance = int(ls[3])  
     print('Your current balance: ' + ls[3])
     deposit_amount = int(input('Enter deposit amount: '))
 
 
-    current_balance += abs(deposit_amount)  # to guarantee the entered value
+    current_balance += abs(deposit_amount)
 
     file_name = ls[0] + '.txt'
     process_list = read_file(file_name)
     id_file = open(file_name, 'a')
 
-    if len(process_list) == 0:  # if there are no processes in the file
+    if len(process_list) == 0:
         last_id = 1
     else:
-        last_id = int(process_list[len(process_list) - 1][0]) + 1  # get last id and increment it
-
+        last_id = int(process_list[len(process_list) - 1][0]) + 1  
     id_file.write('{0}\tdeposit\t\t\t\t{1}\t{2}\t{3}\n'.format(str(last_id), str(time.ctime()), ls[3], str(current_balance)))
     id_file.close()
     ls[3] = str(current_balance)
@@ -118,22 +105,14 @@ def deposit(ls):
     return ls
 
 def show_history(ls):
-    # ls is the list contains account data
-    # ls[0] id
-    # ls[1] name
-    # ls[2] password
-    # ls[3] balance
+    
 
     choice = int(input('1) show deposit processes\n2) show withdraw processes\nchoice>> '))
 
     file_name = ls[0] + '.txt'   
     id_list = read_file(file_name)
 
-    # id_list[line][0]    process_id
-    # id_list[line][1]    process_type
-    # id_list[line][2:6]  process_date
-    # id_list[line][7]    before_process
-    # id_list[line][8]    after_process
+    
     top_line = '\nID\t' + 'Type'.center(len('change_password')) + 'Date and Time'.center(40) + 'before'.center(10) + 'after'.center(15)
     print(top_line)
     print('-' * len(top_line))
@@ -173,8 +152,7 @@ def login(acc_list):
     else:
         acc_file = open('Accounts.txt', 'w')
         print('Saving changes...')
-        # after logging out of the account
-        # write changes to accounts.txt file
+        
         for acc in acc_list:
             for elements in acc:
                 acc_file.write("%s\t" % elements)
@@ -182,8 +160,7 @@ def login(acc_list):
 
             
 def create_account(ls):
-    # ls is a list of lists of lines in accounts file
-    # ls is the accounts_list
+   
     account_name = input('Enter Your Name (WITHOUT SPACES): ')
     account_password = input('Enter Your Password (WITHOUT SPACES): ')
 
@@ -208,11 +185,7 @@ def create_account(ls):
 
 
 def menu2(account):
-    # account is the list of single logined user 
-    # account[0] id
-    # account[1] name
-    # account[2] password
-    # account[3] balance
+    
     print("\n---------Hello, {0}--------- ".format(account[1]))
     while True:
         ch = int(input("\n1) show info \n2) show process history\n3) deposit\n4) withdraw\n5) logout\n\nchoice>> "))
@@ -244,14 +217,14 @@ while count:
     if choice == 1:
         clear_screen()
         try:
-        # to enable the option of (ctrl+c) to go back
+        
             login(accounts_list)
         except KeyboardInterrupt:
             clear_screen()
     elif choice == 2:
         create_account(accounts_list)
     elif choice == 3:
-        # close the program
+        
         exit()
     else:
         clear_screen()
