@@ -139,6 +139,28 @@ def def show_history(ls):
         id_file.close()
         accounts_file.close()
         ls.append([str(new_last_id), account_name, account_password, '0'])
+   def menu2(account):
+       print("\n---------Hello, {0}--------- ".format(account[1]))
+    while True:
+        ch = int(input("\n1) show info \n2) show process history\n3) deposit\n4) withdraw\n5) logout\n\nchoice>> "))
+
+        clear_screen()
+        if ch == 1:
+            print("ID: {}\nName: {}\nBalance: {}\n".format(account[0], account[1], account[3]))
+            
+        elif ch == 2:
+            show_history(account)
+        elif ch == 3:
+            deposit(account)
+        elif ch == 4:
+            withdraw(account)
+        elif ch == 5:
+            break
+        else:
+            print("ERROR: Wrong choice\n")
+
+
+
 
 
 
