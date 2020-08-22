@@ -79,3 +79,23 @@ def deposit(ls):
     print('Your current balance: ' + ls[3])
 
     return ls
+def def show_history(ls):
+        choice=int(input('1) show deposit processes\n2) show withdraw processes\nchoice>> '))
+        file_name=ls[0]+'.txt'
+        id_list=read_file(file_name)
+        top_line='\nID\t'+'Type'.center(len('change_password')) + 'Date and Time'.center(40) + 'before'.center(10) + 'after'.center(15)
+        print(top_line)
+        print('-' * len(top_line))
+        if choice == 1:
+            for line in id_list:
+                if line[1] == 'deposit':
+                    print_process(line)
+        elif choice == 2:
+            for line in id_list:
+                if line[1] == 'withdraw':
+                    print_process(line)
+        else:
+            print('ERROR: Wrong choice')
+
+        input('\nPress Enter to go back..')
+        os.system('clear')
